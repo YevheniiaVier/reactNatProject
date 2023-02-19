@@ -2,10 +2,11 @@ import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
+    fontFamily: "Roboto-Regular",
     height: Platform.OS === "ios" ? 50 : 100,
     flex: 1,
     // padding: 24,
-    backgroundColor: "#ccc",
+    // backgroundColor: "#ccc",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -39,5 +40,9 @@ export const styles = StyleSheet.create({
   },
   btnTitle: {
     color: "#fff",
+  },
+  bcg: {
+    width: "100%",
+    height: "100%",
   },
 });
