@@ -24,7 +24,11 @@ export const RegistrationScreen = () => {
   const [email, setEmail] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
+  const [isFocused, setIsFocused] = useState({
+    login: false,
+    email: false,
+    password: false,
+  });
   const nameHandler = (value) => setName(value);
   const passwordHandler = (value) => setPassword(value);
   const emailHandler = (value) => setEmail(value);
@@ -58,6 +62,13 @@ export const RegistrationScreen = () => {
     setSecureTextEntry(!secureTextEntry);
   };
 
+  const handleImputFocus = (value) => {
+    console.log("focused");
+    setIsFocused((prevState) => ({ ...prevState, [value]: true }));
+  };
+  const handleImputBlur = (value) => {
+    setIsFocused((prevState) => ({ ...prevState, [value]: false }));
+  };
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -73,34 +84,48 @@ export const RegistrationScreen = () => {
 
               <View>
                 <TextInput
-                  onFocus={() => setIsShowKeyboard(true)}
+                  onFocus={() => {
+                    setIsShowKeyboard(true);
+                    handleImputFocus("login");
+                  }}
+                  onBlur={() => handleImputBlur("login")}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Логін"
                   value={name}
                   onChangeText={nameHandler}
-                  style={styles.input}
+                  style={isFocused.login ? styles.inputFocused : styles.input}
                 />
               </View>
 
               <View>
                 <TextInput
-                  onFocus={() => setIsShowKeyboard(true)}
+                  onFocus={() => {
+                    setIsShowKeyboard(true);
+                    handleImputFocus("email");
+                  }}
+                  onBlur={() => handleImputBlur("email")}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Адреса електронної пошти"
                   value={email}
                   onChangeText={emailHandler}
-                  style={styles.input}
+                  style={isFocused.email ? styles.inputFocused : styles.input}
                 />
               </View>
               <View>
                 <TextInput
-                  onFocus={() => setIsShowKeyboard(true)}
+                  onFocus={() => {
+                    setIsShowKeyboard(true);
+                    handleImputFocus("password");
+                  }}
+                  onBlur={() => handleImputBlur("password")}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Пароль"
                   value={password}
                   secureTextEntry={secureTextEntry}
                   onChangeText={passwordHandler}
-                  style={styles.input}
+                  style={
+                    isFocused.password ? styles.inputFocused : styles.input
+                  }
                 />
                 <TouchableOpacity
                   style={styles.passwordBtn}

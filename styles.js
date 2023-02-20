@@ -79,7 +79,19 @@ export const styles = StyleSheet.create({
     marginBottom: 78,
     alignSelf: "center",
   },
-
+  inputFocused: {
+    height: 50,
+    padding: 16,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderRadius: 8,
+    marginBottom: 16,
+    backgroundColor: "#F6F6F6",
+    fontSize: 16,
+    color: "#212121",
+    fontFamily: "Roboto-Medium",
+    borderColor: "#FF6C00",
+  },
   passwordBox: {
     position: "relative",
   },
