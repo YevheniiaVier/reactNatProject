@@ -121,6 +121,7 @@ export const styles = StyleSheet.create({
   },
   addUserImgBtn: {
     position: "absolute",
+    backgroundColor: "#FFFFFF",
     bottom: 14,
     right: -12.5,
     width: 25,
@@ -135,4 +136,17 @@ export const styles = StyleSheet.create({
     // width: 13,
     // height: 13,
   },
+  // LoginInput: {
+  //   height: 50,
+  //   padding: 16,
+  //   borderWidth: 1,
+  //   borderColor: "#E8E8E8",
+  //   borderStyle: "solid",
+  //   borderRadius: 8,
+  //   marginBottom: 16,
+  //   backgroundColor: "#F6F6F6",
+  //   fontSize: 16,
+  //   color: "#212121",
+  //   fontFamily: "Roboto-Medium",
+  // },
 });

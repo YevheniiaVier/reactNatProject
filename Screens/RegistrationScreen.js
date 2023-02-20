@@ -14,11 +14,10 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import { styles } from "../styles";
+import { styles } from "./styles";
 
 export const RegistrationScreen = () => {
   const [name, setName] = useState("");
-  const [image, setImage] = useState(null);
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -50,7 +49,7 @@ export const RegistrationScreen = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const onLogin = () => {
+  const onRegister = () => {
     console.log(name);
     console.log(password);
     console.log(email);
@@ -63,7 +62,6 @@ export const RegistrationScreen = () => {
   };
 
   const handleImputFocus = (value) => {
-    console.log("focused");
     setIsFocused((prevState) => ({ ...prevState, [value]: true }));
   };
   const handleImputBlur = (value) => {
@@ -144,7 +142,7 @@ export const RegistrationScreen = () => {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.btn}
-                    onPress={onLogin}
+                    onPress={onRegister}
                   >
                     <Text style={styles.btnTitle}>Зареєструватися</Text>
                   </TouchableOpacity>
@@ -152,10 +150,15 @@ export const RegistrationScreen = () => {
                 </>
               )}
               <View style={styles.imgBox}>
-                <Image source={{ uri: image }} style={styles.userImage} />
-                {image ? (
+                {isShowKeyboard && (
+                  <Image
+                    source={require("../assets/images/userImg.jpg")}
+                    style={styles.userImage}
+                  />
+                )}
+                {isShowKeyboard ? (
                   <TouchableOpacity
-                    style={styles.addUserImgBtn}
+                    style={{ ...styles.addUserImgBtn, borderColor: "#E8E8E8" }}
                     activeOpacity={0.8}
                   >
                     <Image
