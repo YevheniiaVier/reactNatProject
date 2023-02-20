@@ -17,9 +17,11 @@ import { styles } from "../styles";
 export const RegistrationScreen = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const nameHandler = (text) => setName(text);
   const passwordHandler = (text) => setPassword(text);
+  const emailHandler = (text) => setEmail(text);
 
   const onLogin = () => {
     Alert.alert("Credentials", `${name} + ${password}`);
@@ -27,23 +29,29 @@ export const RegistrationScreen = () => {
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
+        <View>
           <TextInput
             placeholder="Username"
             value={name}
             onChangeText={nameHandler}
             style={styles.input}
           />
+
           <TextInput
-            placeholder="Password"
+            placeholder="E-mail"
+            value={password}
+            onChangeText={emailHandler}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Пароль"
             value={password}
             onChangeText={passwordHandler}
             style={styles.input}
           />
-          {/* <Text>My React Native Project</Text> */}
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.btn}
@@ -51,8 +59,8 @@ export const RegistrationScreen = () => {
           >
             <Text style={styles.btnTitle}>Login</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
+        </View>
+      </KeyboardAvoidingView>
     </>
   );
 };
