@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    // marginTop: 16,
+    // marginTop: 16,a
     // paddingVertical: 8,
     // borderWidth: 4,
     // borderColor: "#20232a",
@@ -54,9 +54,15 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   bcg: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+
+    // width: "100%",
+    // height: "100%",
+    // flex: 1,
     justifyContent: "flex-end",
   },
   formTitle: {
@@ -71,13 +77,14 @@ export const styles = StyleSheet.create({
 
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    height: 550,
+    // height: 550,
     alignItems: "center",
     paddingHorizontal: 16,
   },
   formText: {
     fontSize: 16,
     color: "#1B4371",
+    marginBottom: 78,
   },
 
   passwordBox: {
@@ -90,7 +97,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E8E8E8",
     borderStyle: "solid",
-
+    marginBottom: 16,
     borderRadius: 8,
     backgroundColor: "#F6F6F6",
     fontSize: 16,
