@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { StatusBar } from "expo-status-bar";
-import * as Font from "expo-font";
+// import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
@@ -11,6 +11,8 @@ import {
   ImageBackground,
   Keyboard,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 import { styles } from "./styles";
@@ -43,8 +45,11 @@ export default function App() {
           resizeMode="cover"
           style={styles.bcg}
         >
+          {/* <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          > */}
           <RegistrationScreen />
-
+          {/* </KeyboardAvoidingView> */}
           <StatusBar style="auto" />
         </ImageBackground>
       </View>

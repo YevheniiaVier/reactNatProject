@@ -1,64 +1,6 @@
 import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#fff",
-  // },
-  // image: {
-  //   flex: 1,
-  //   resizeMode: "cover",
-  //   justifyContent: "flex-end",
-  //   // justifyContent: "center",
-  //   // alignItems: "center",
-  // },
-  // input: {
-  //   borderWidth: 1,
-  //   borderColor: "#f0f8ff",
-  //   height: 40,
-  //   borderRadius: 6,
-
-  //   color: "#f0f8ff",
-  // },
-  // form: {
-  //   marginHorizontal: 40,
-  // },
-  // inputTitle: {
-  //   color: "#f0f8ff",
-  //   marginBottom: 10,
-  //   fontSize: 18,
-  // },
-  // btn: {
-  //   borderRadius: 6,
-  //   borderWidth: 1,
-  //   height: 40,
-  //   marginTop: 40,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   marginHorizontal: 20,
-  //   ...Platform.select({
-  //     ios: {
-  //       backgroundColor: "transparent",
-  //       borderColor: "#f0f8ff",
-  //     },
-  //     android: {
-  //       backgroundColor: "#4169e1",
-  //       borderColor: "transparent",
-  //     },
-  //   }),
-  // },
-  // btnTitle: {
-  //   color: Platform.OS === "ios" ? "#4169e1" : "#f0f8ff",
-  //   fontSize: 18,
-  // },
-  // header: {
-  //   alignItems: "center",
-  //   marginBottom: 150,
-  // },
-  // headerTitle: {
-  //   fontSize: 30,
-  //   color: "#f0f8ff",
-  // },
   container: {
     fontFamily: "Roboto-Regular",
     height: Platform.OS === "ios" ? 50 : 100,
@@ -66,9 +8,9 @@ export const styles = StyleSheet.create({
     lineHeight: 19,
 
     // padding: 24,
-    // backgroundColor: "#ccc",
-    // alignItems: "center",
-    // justifyContent: "center",
+    backgroundColor: "#ccc",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     // marginTop: 16,
@@ -122,15 +64,13 @@ export const styles = StyleSheet.create({
     color: "#212121",
     fontSize: 30,
     marginBottom: 33,
-
-    // fontWeight: 500,
   },
   form: {
     paddingTop: 92,
     backgroundColor: "#FFFFFF",
-    // justifyContent: "flex-start",
-    borderTopLeftRadius: "25",
-    borderTopRightRadius: "25",
+
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     height: 550,
     alignItems: "center",
     paddingHorizontal: 16,
