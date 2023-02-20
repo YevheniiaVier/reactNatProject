@@ -17,6 +17,7 @@ import { styles } from "./styles";
 
 const RobotoRegular = require("./assets/fonts/Roboto/Roboto-Regular.ttf");
 const RobotoBold = require("./assets/fonts/Roboto/Roboto-Bold.ttf");
+const RobotoMedium = require("./assets/fonts/Roboto/Roboto-Medium.ttf");
 
 export default function App() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -24,6 +25,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": RobotoRegular,
     "Roboto-Bold": RobotoBold,
+    "Roboto-Medium": RobotoMedium,
   });
 
   if (!fontsLoaded) {
@@ -43,7 +45,7 @@ export default function App() {
         >
           <RegistrationScreen />
 
-          {/* <StatusBar style="auto" /> */}
+          <StatusBar style="auto" />
         </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
