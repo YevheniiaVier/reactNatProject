@@ -6,11 +6,8 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     // height: Platform.OS === "ios" ? 50 : 100,
     flex: 1,
-    // lineHeight: 19,
-
+    lineHeight: 19,
     backgroundColor: "#ccc",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   bcg: {
     flex: 1,
@@ -30,6 +27,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   form: {
+    position: "relative",
     paddingTop: 92,
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
@@ -106,9 +104,10 @@ export const styles = StyleSheet.create({
   },
   imgBox: {
     position: "absolute",
-    top: "-13%",
-    left: "45%",
-    transform: [{ translateX: -25 }],
+    top: -120 / 2,
+    left: "50%",
+    transform: [{ translateX: -50 }],
+
     width: 120,
     height: 120,
     borderRadius: 16,
@@ -127,7 +126,7 @@ export const styles = StyleSheet.create({
     width: 25,
     height: 25,
     borderWidth: 1,
-    borderRadius: 12.5,
+    borderRadius: 50,
     borderColor: "#FF6C00",
     justifyContent: "center",
     alignItems: "center",
