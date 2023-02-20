@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import {
-  StatusBar,
   Text,
   View,
   TextInput,
@@ -11,7 +10,6 @@ import {
   TouchableOpacity,
   Keyboard,
   ImageBackground,
-  Dimensions,
   Image,
 } from "react-native";
 import { styles } from "./styles";

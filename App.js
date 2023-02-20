@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from "react";
-
-import { StatusBar } from "expo-status-bar";
-// import * as Font from "expo-font";
-import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 import { RegistrationScreen } from "./Screens/RegistrationScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
 
-import {
-  Text,
-  View,
-  ImageBackground,
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
-
-import { styles } from "./Screens/styles";
+import { Text } from "react-native";
 
 const RobotoRegular = require("./assets/fonts/Roboto/Roboto-Regular.ttf");
 const RobotoBold = require("./assets/fonts/Roboto/Roboto-Bold.ttf");
@@ -34,6 +19,6 @@ export default function App() {
     return <Text>Loading...</Text>;
   }
 
-  // return <RegistrationScreen />;
-  return <LoginScreen />;
+  return <RegistrationScreen />;
+  // return <LoginScreen />;
 }
