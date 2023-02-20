@@ -22,8 +22,6 @@ const RobotoBold = require("./assets/fonts/Roboto/Roboto-Bold.ttf");
 const RobotoMedium = require("./assets/fonts/Roboto/Roboto-Medium.ttf");
 
 export default function App() {
-  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": RobotoRegular,
     "Roboto-Bold": RobotoBold,

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import {
   StatusBar,
   Text,
@@ -9,22 +10,24 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
-  Alert,
   ImageBackground,
-  // Button,
+  Dimensions,
+  Image,
 } from "react-native";
 import { styles } from "../styles";
 
 export const RegistrationScreen = () => {
   const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
+
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
-  const nameHandler = (text) => setName(text);
-  const passwordHandler = (text) => setPassword(text);
-  const emailHandler = (text) => setEmail(text);
+  const nameHandler = (value) => setName(value);
+  const passwordHandler = (value) => setPassword(value);
+  const emailHandler = (value) => setEmail(value);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
@@ -44,48 +47,60 @@ export const RegistrationScreen = () => {
     Keyboard.dismiss();
   };
   const onLogin = () => {
-    Alert.alert("Credentials", `${name} + ${password}`);
+    console.log(name);
+    console.log(password);
+    console.log(email);
+    setEmail("");
+    setName("");
+    setPassword("");
   };
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={dismissKeyboard}>
         <ImageBackground
-          source={require("../assets/images/bcgimg.jpg")}
-          resizeMode="cover"
           style={styles.bcg}
+          source={require("../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
           >
             <View style={styles.form}>
               <Text style={styles.formTitle}>Реєстрація</Text>
-              <TextInput
-                placeholderTextColor="#BDBDBD9"
-                placeholder="Логін"
-                value={name}
-                onChangeText={nameHandler}
-                style={styles.input}
-              />
 
-              <TextInput
-                placeholderTextColor="#BDBDBD9"
-                placeholder="Адреса електронної пошти"
-                value={email}
-                onChangeText={emailHandler}
-                style={styles.input}
-              />
-              <View style={styles.passwordBox}>
+              <View>
                 <TextInput
+                  onFocus={() => setIsShowKeyboard(true)}
+                  placeholderTextColor="#BDBDBD9"
+                  placeholder="Логін"
+                  value={name}
+                  onChangeText={nameHandler}
+                  style={styles.input}
+                />
+              </View>
+
+              <View>
+                <TextInput
+                  onFocus={() => setIsShowKeyboard(true)}
+                  placeholderTextColor="#BDBDBD9"
+                  placeholder="Адреса електронної пошти"
+                  value={email}
+                  onChangeText={emailHandler}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <TextInput
+                  onFocus={() => setIsShowKeyboard(true)}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Пароль"
                   value={password}
                   secureTextEntry={secureTextEntry}
                   onChangeText={passwordHandler}
-                  style={styles.passwordInput}
+                  style={styles.input}
                 />
                 <TouchableOpacity
                   style={styles.passwordBtn}
@@ -111,12 +126,34 @@ export const RegistrationScreen = () => {
                   <Text style={styles.formText}>Вже є аккаунт? Увійти</Text>
                 </>
               )}
+              <View style={styles.imgBox}>
+                <Image source={{ uri: image }} style={styles.userImage} />
+                {image ? (
+                  <TouchableOpacity
+                    style={styles.addUserImgBtn}
+                    activeOpacity={0.8}
+                  >
+                    <Image
+                      source={require("../assets/images/removeBtn.png")}
+                      style={styles.addUserBtnImg}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.addUserImgBtn}
+                    activeOpacity={0.7}
+                  >
+                    <Image
+                      source={require("../assets/images/addBtn.png")}
+                      style={styles.addUserBtnImg}
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           </KeyboardAvoidingView>
-
-          <StatusBar style="auto" />
         </ImageBackground>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };
