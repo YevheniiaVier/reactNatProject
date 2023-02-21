@@ -26,6 +26,7 @@ export const RegistrationScreen = ({ navigation }) => {
     email: false,
     password: false,
   });
+
   const nameHandler = (value) => setName(value);
   const passwordHandler = (value) => setPassword(value);
   const emailHandler = (value) => setEmail(value);
@@ -49,7 +50,7 @@ export const RegistrationScreen = ({ navigation }) => {
   };
   const onRegister = () => {
     console.log({ name, password, email });
-
+    // navigation.navigate("Posts");
     setEmail("");
     setName("");
     setPassword("");

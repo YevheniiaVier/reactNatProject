@@ -24,6 +24,8 @@ export const LoginScreen = ({ navigation }) => {
     email: false,
     password: false,
   });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const passwordHandler = (value) => setPassword(value);
   const emailHandler = (value) => setEmail(value);
 
@@ -47,6 +49,7 @@ export const LoginScreen = ({ navigation }) => {
   const onLogin = () => {
     console.log(password);
     console.log(email);
+    // navigation.navigate("Posts");
     setEmail("");
     setPassword("");
   };

@@ -44,6 +44,12 @@ export const userRoute = (isAuth) => {
   }
   return (
     <Tab.Navigator
+      // tabBarOptions={{
+      //   tabStyle: {
+      //     justifyContent: "center",
+      //     marginBottom: 8,
+      //   },
+      // }}
       screenOptions={{
         tabBarStyle: {
           height: 68,
@@ -100,7 +106,7 @@ export const userRoute = (isAuth) => {
           tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
             <View style={styles.addBtn}>
-              <Ionicons name="add" size={24} color="rgba(33, 33, 33, 0.8)" />
+              <Ionicons name="add" size={24} color="#fff" />
             </View>
           ),
         }}
