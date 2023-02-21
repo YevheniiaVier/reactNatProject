@@ -21,45 +21,49 @@ const RobotoMedium = require("./assets/fonts/Roboto/Roboto-Medium.ttf");
 const Tab = createBottomTabNavigator();
 const AuthStack = createNativeStackNavigator();
 
+const userRoute = (isAuth) => {
+  if (!isAuth) {
+    return (
+      <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Registration"
+          component={RegistrationScreen}
+        />
+        <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Login"
+          component={LoginScreen}
+        />
+      </AuthStack.Navigator>
+    );
+  }
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Posts" component={PostsScreen} />
+      <Tab.Screen name="CreatePosts" component={CreatePostsScreen} />
+      <Tab.Screen name="Comments" component={CommentsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+    </Tab.Navigator>
+  );
+};
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": RobotoRegular,
     "Roboto-Bold": RobotoBold,
     "Roboto-Medium": RobotoMedium,
   });
+  const routing = userRoute(null);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Posts" component={PostsScreen} />
-        <Tab.Screen name="CreatePosts" component={CreatePostsScreen} />
-        <Tab.Screen name="Comments" component={CommentsScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Home" component={HomeScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-
-{
-  /* <AuthStack.Navigator initialRouteName="Login">
-  <AuthStack.Screen
-    options={{
-      headerShown: false,
-    }}
-    name="Registration"
-    component={RegistrationScreen}
-  />
-  <AuthStack.Screen
-    options={{
-      headerShown: false,
-    }}
-    name="Login"
-    component={LoginScreen}
-  />
-</AuthStack.Navigator>; */
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }

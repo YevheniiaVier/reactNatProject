@@ -49,9 +49,7 @@ export const RegistrationScreen = ({ navigation }) => {
   };
   const onRegister = () => {
     console.log({ name, password, email });
-    // console.log(name);
-    // console.log(password);
-    // console.log(email);
+
     setEmail("");
     setName("");
     setPassword("");
