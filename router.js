@@ -1,5 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { Button, TouchableOpacity, View } from "react-native";
+
+import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,6 +16,7 @@ import { CommentsScreen } from "./Screens/main/CommentsScreen";
 import { ProfileScreen } from "./Screens/main/ProfileScreen";
 import { MapScreen } from "./Screens/main/MapScreen";
 import { HomeScreen } from "./Screens/main/HomeScreen";
+import { styles } from "./Screens/main/mainStyles";
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -38,9 +43,26 @@ export const userRoute = (isAuth) => {
     );
   }
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          height: 68,
+          borderTopWidth: 1,
+          shadowColor: "rgba(0, 0, 0, 0.3)",
+          shadowOpacity: 1,
+          elevation: 3,
+        },
+      }}
+    >
       <Tab.Screen
         options={{
+          title: "Публікації",
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontFamily: "Roboto-Bold",
+            fontSize: 17,
+          },
+
           tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
             <AntDesign
@@ -49,6 +71,26 @@ export const userRoute = (isAuth) => {
               color="rgba(33, 33, 33, 0.8)"
             />
           ),
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            borderBottomWidth: 1,
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowOpacity: 1,
+            elevation: 3,
+          },
+          headerRight: () => (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                // Handle logout action here
+              }}
+              style={styles.logoutBtn}
+            >
+              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+            </TouchableOpacity>
+          ),
+
+          headerTitleAlign: "center",
         }}
         name="Posts"
         component={PostsScreen}
@@ -57,12 +99,10 @@ export const userRoute = (isAuth) => {
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
-            <Ionicons name="add" size={24} color="rgba(33, 33, 33, 0.8)" />
+            <View style={styles.addBtn}>
+              <Ionicons name="add" size={24} color="rgba(33, 33, 33, 0.8)" />
+            </View>
           ),
-
-          backgroundColor: "orange",
-          borderRadius: 6,
-          height: 30,
         }}
         name="CreatePosts"
         component={CreatePostsScreen}

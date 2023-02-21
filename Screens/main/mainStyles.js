@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     // height: Platform.OS === "ios" ? 50 : 100,
     flex: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -32,5 +32,16 @@ export const styles = StyleSheet.create({
     color: "#1B4371",
     marginBottom: 78,
     alignSelf: "center",
+  },
+  logoutBtn: {
+    marginRight: 10,
+  },
+  addBtn: {
+    width: 70,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#FF6C00",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
