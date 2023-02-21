@@ -48,9 +48,10 @@ export const RegistrationScreen = () => {
     Keyboard.dismiss();
   };
   const onRegister = () => {
-    console.log(name);
-    console.log(password);
-    console.log(email);
+    console.log({ name, password, email });
+    // console.log(name);
+    // console.log(password);
+    // console.log(email);
     setEmail("");
     setName("");
     setPassword("");
@@ -70,7 +71,7 @@ export const RegistrationScreen = () => {
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
         <ImageBackground
           style={styles.bcg}
-          source={require("../assets/images/bcgimg.jpg")}
+          source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
@@ -150,7 +151,7 @@ export const RegistrationScreen = () => {
               <View style={styles.imgBox}>
                 {isShowKeyboard && (
                   <Image
-                    source={require("../assets/images/userImg.jpg")}
+                    source={require("../../assets/images/userImg.jpg")}
                     style={styles.userImage}
                   />
                 )}
@@ -160,7 +161,7 @@ export const RegistrationScreen = () => {
                     activeOpacity={0.8}
                   >
                     <Image
-                      source={require("../assets/images/removeBtn.png")}
+                      source={require("../../assets/images/removeBtn.png")}
                       style={styles.addUserBtnImg}
                     />
                   </TouchableOpacity>
@@ -170,7 +171,7 @@ export const RegistrationScreen = () => {
                     activeOpacity={0.7}
                   >
                     <Image
-                      source={require("../assets/images/addBtn.png")}
+                      source={require("../../assets/images/addBtn.png")}
                       style={styles.addUserBtnImg}
                     />
                   </TouchableOpacity>

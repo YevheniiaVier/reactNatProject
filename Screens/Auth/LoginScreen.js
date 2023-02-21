@@ -65,7 +65,7 @@ export const LoginScreen = () => {
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
         <ImageBackground
           style={styles.bcg}
-          source={require("../assets/images/bcgimg.jpg")}
+          source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
