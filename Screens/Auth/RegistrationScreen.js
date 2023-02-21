@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({ navigation }) => {
   const [name, setName] = useState("");
 
   const [password, setPassword] = useState("");
@@ -145,7 +145,12 @@ export const RegistrationScreen = () => {
                   >
                     <Text style={styles.btnTitle}>Зареєструватися</Text>
                   </TouchableOpacity>
-                  <Text style={styles.formText}>Вже є аккаунт? Увійти</Text>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => navigation.navigate("Login")}
+                  >
+                    <Text style={styles.formText}>Вже є аккаунт? Увійти</Text>
+                  </TouchableOpacity>
                 </>
               )}
               <View style={styles.imgBox}>
