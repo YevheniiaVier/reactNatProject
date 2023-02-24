@@ -9,7 +9,10 @@ const {
   TextInput,
   Keyboard,
 } = require("react-native");
+
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import { styles } from "./styles/cratePostScreenStyles";
 
 export const CreatePostsScreen = ({ navigation }) => {
@@ -96,6 +99,15 @@ export const CreatePostsScreen = ({ navigation }) => {
               onPress={onPosting}
             >
               <Text style={styles.btnTitle}>Опублікувати</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.trashContainer}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.deleteBtn}
+              onPress={onPosting}
+            >
+              <FontAwesome5 name="trash-alt" size={24} color="#DADADA" />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

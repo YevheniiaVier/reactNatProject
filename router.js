@@ -45,16 +45,6 @@ export const userRoute = (isAuth) => {
   return (
     <Tab.Navigator
       initialRouteName="CreatePosts"
-      // tabBarOptions={
-      // {
-      // showLabel: false,
-      // labeled: false,
-      //   tabStyle: {
-      //     justifyContent: "center",
-      //     marginBottom: 8,
-      //   },
-      // }
-      // }
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -74,9 +64,6 @@ export const userRoute = (isAuth) => {
             fontFamily: "Roboto-Bold",
             fontSize: 17,
           },
-          // cardStyle: {
-          //   backgroundColor: "red",
-          // },
 
           tabBarIcon: ({ focused, size, color }) => (
             <AntDesign
@@ -129,18 +116,19 @@ export const userRoute = (isAuth) => {
             shadowOpacity: 1,
             elevation: 3,
           },
+          tabBarStyle: {
+            display: "none",
+          },
           headerLeft: (props) => (
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => {
-                // Handle back action here
-              }}
+              // onPress={() => navigation.goBack()}
               style={styles.backBtn}
             >
               <MaterialIcons
                 name="keyboard-backspace"
                 size={24}
-                color="#BDBDBD"
+                color="rgba(33, 33, 33, 0.8)"
               />
             </TouchableOpacity>
           ),
