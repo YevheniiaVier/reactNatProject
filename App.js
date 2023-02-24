@@ -1,7 +1,7 @@
 import { useFonts } from "expo-font";
-import { Context } from "./context";
-import { useState, useEffect } from "react";
-import { createContext } from "react";
+// import { Context } from "./context";
+import { useState } from "react";
+// import { createContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
 import { userRoute } from "./router";
@@ -18,7 +18,7 @@ export default function App({ navigation, route }) {
     "Roboto-Bold": RobotoBold,
     "Roboto-Medium": RobotoMedium,
   });
-  const routing = userRoute(null);
+  const routing = userRoute({});
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;

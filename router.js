@@ -1,7 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Button, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+
+const Tab = createBottomTabNavigator();
+const AuthStack = createNativeStackNavigator();
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -17,9 +20,6 @@ import { ProfileScreen } from "./Screens/main/ProfileScreen";
 import { MapScreen } from "./Screens/main/MapScreen";
 import { HomeScreen } from "./Screens/main/HomeScreen";
 import { styles } from "./Screens/main/mainStyles";
-
-const Tab = createBottomTabNavigator();
-const AuthStack = createNativeStackNavigator();
 
 export const userRoute = (isAuth) => {
   if (!isAuth) {
@@ -44,13 +44,19 @@ export const userRoute = (isAuth) => {
   }
   return (
     <Tab.Navigator
-      // tabBarOptions={{
+      initialRouteName="Posts"
+      // tabBarOptions={
+      // {
+      // showLabel: false,
+      // labeled: false,
       //   tabStyle: {
       //     justifyContent: "center",
       //     marginBottom: 8,
       //   },
-      // }}
+      // }
+      // }
       screenOptions={{
+        tabBarShowLabel: false,
         tabBarStyle: {
           height: 68,
           borderTopWidth: 1,
@@ -68,8 +74,10 @@ export const userRoute = (isAuth) => {
             fontFamily: "Roboto-Bold",
             fontSize: 17,
           },
+          // cardStyle: {
+          //   backgroundColor: "red",
+          // },
 
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
             <AntDesign
               name="appstore-o"
@@ -103,7 +111,6 @@ export const userRoute = (isAuth) => {
       />
       <Tab.Screen
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
             <View style={styles.addBtn}>
               <Ionicons name="add" size={24} color="#fff" />
@@ -116,7 +123,6 @@ export const userRoute = (isAuth) => {
       {/* <Tab.Screen name="Comments" component={CommentsScreen} /> */}
       <Tab.Screen
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused, size, color }) => (
             <Feather name="user" size={24} color="rgba(33, 33, 33, 0.8)" />
           ),
