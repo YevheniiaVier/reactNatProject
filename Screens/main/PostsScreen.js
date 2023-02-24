@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import { styles } from "./mainStyles";
+import { styles } from "./styles/postScreenStyles";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";

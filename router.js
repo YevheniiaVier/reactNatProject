@@ -19,7 +19,7 @@ import { CommentsScreen } from "./Screens/main/CommentsScreen";
 import { ProfileScreen } from "./Screens/main/ProfileScreen";
 import { MapScreen } from "./Screens/main/MapScreen";
 import { HomeScreen } from "./Screens/main/HomeScreen";
-import { styles } from "./Screens/main/mainStyles";
+import { styles } from "./Screens/main/styles/mainStyles";
 
 export const userRoute = (isAuth) => {
   if (!isAuth) {
@@ -44,7 +44,7 @@ export const userRoute = (isAuth) => {
   }
   return (
     <Tab.Navigator
-      initialRouteName="Posts"
+      initialRouteName="CreatePosts"
       // tabBarOptions={
       // {
       // showLabel: false,
@@ -111,11 +111,40 @@ export const userRoute = (isAuth) => {
       />
       <Tab.Screen
         options={{
+          title: "Створити публікацію",
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontFamily: "Roboto-Bold",
+            fontSize: 17,
+          },
           tabBarIcon: ({ focused, size, color }) => (
             <View style={styles.addBtn}>
               <Ionicons name="add" size={24} color="#fff" />
             </View>
           ),
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            borderBottomWidth: 1,
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowOpacity: 1,
+            elevation: 3,
+          },
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                // Handle back action here
+              }}
+              style={styles.backBtn}
+            >
+              <MaterialIcons
+                name="keyboard-backspace"
+                size={24}
+                color="#BDBDBD"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: "center",
         }}
         name="CreatePosts"
         component={CreatePostsScreen}
@@ -123,6 +152,12 @@ export const userRoute = (isAuth) => {
       {/* <Tab.Screen name="Comments" component={CommentsScreen} /> */}
       <Tab.Screen
         options={{
+          // title: "Публікації",
+          // headerTintColor: "#212121",
+          // headerTitleStyle: {
+          //   fontFamily: "Roboto-Bold",
+          //   fontSize: 17,
+          // },
           tabBarIcon: ({ focused, size, color }) => (
             <Feather name="user" size={24} color="rgba(33, 33, 33, 0.8)" />
           ),

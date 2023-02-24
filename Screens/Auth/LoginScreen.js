@@ -57,10 +57,10 @@ export const LoginScreen = ({ navigation }) => {
     setSecureTextEntry(!secureTextEntry);
   };
 
-  const handleImputFocus = (value) => {
+  const handleInputFocus = (value) => {
     setIsFocused((prevState) => ({ ...prevState, [value]: true }));
   };
-  const handleImputBlur = (value) => {
+  const handleInputBlur = (value) => {
     setIsFocused((prevState) => ({ ...prevState, [value]: false }));
   };
   return (
@@ -80,9 +80,9 @@ export const LoginScreen = ({ navigation }) => {
                 <TextInput
                   onFocus={() => {
                     setIsShowKeyboard(true);
-                    handleImputFocus("email");
+                    handleInputFocus("email");
                   }}
-                  onBlur={() => handleImputBlur("email")}
+                  onBlur={() => handleInputBlur("email")}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Адреса електронної пошти"
                   value={email}
@@ -94,9 +94,9 @@ export const LoginScreen = ({ navigation }) => {
                 <TextInput
                   onFocus={() => {
                     setIsShowKeyboard(true);
-                    handleImputFocus("password");
+                    handleInputFocus("password");
                   }}
-                  onBlur={() => handleImputBlur("password")}
+                  onBlur={() => handleInputBlur("password")}
                   placeholderTextColor="#BDBDBD9"
                   placeholder="Пароль"
                   value={password}
