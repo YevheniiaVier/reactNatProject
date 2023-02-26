@@ -17,13 +17,16 @@ import { AntDesign } from "@expo/vector-icons";
 export const CommentsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.imgWrap}>
-        <Image source={{ uri: img }} style={styles.img} />
+      <View style={styles.imgBox}>
+        <Image
+          source={require("../../assets/images/posts/post-img2.jpg")}
+          style={styles.img}
+        />
       </View>
-      <View style={styles.commentsListWrap}>
+      <View style={styles.commentsContainer}>
         <FlatList />
       </View>
-      <View style={styles.commentsInputWrap}>
+      <View style={styles.commentsInputBox}>
         <TextInput
           placeholder="Comment..."
           placeholderTextColor={"#BDBDBD"}
@@ -33,7 +36,7 @@ export const CommentsScreen = () => {
           style={styles.commentsInput}
         />
         <TouchableOpacity
-          style={styles.commentsSubmitBtn}
+          style={styles.submitBtn}
           // onPress={onSubmit}
         >
           <AntDesign name="arrowup" size={14} color="#ffffff" />
