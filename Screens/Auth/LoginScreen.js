@@ -49,7 +49,7 @@ export const LoginScreen = ({ navigation }) => {
   const onLogin = () => {
     console.log(password);
     console.log(email);
-    // navigation.navigate("Posts");
+    navigation.navigate("Home");
     setEmail("");
     setPassword("");
   };

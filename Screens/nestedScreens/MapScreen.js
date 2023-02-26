@@ -1,5 +1,5 @@
 const { View, Text } = require("react-native");
-import { styles } from "./styles/mainStyles";
+import { styles } from "../main/styles/mainStyles";
 
 export const MapScreen = () => {
   return (

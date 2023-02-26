@@ -50,7 +50,7 @@ export const RegistrationScreen = ({ navigation }) => {
   };
   const onRegister = () => {
     console.log({ name, password, email });
-    // navigation.navigate("Posts");
+    navigation.navigate("Home");
     setEmail("");
     setName("");
     setPassword("");
