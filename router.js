@@ -44,7 +44,7 @@ export const userRoute = (isAuth) => {
   }
   return (
     <Tab.Navigator
-      initialRouteName="CreatePosts"
+      initialRouteName="Profile"
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {

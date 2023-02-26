@@ -6,12 +6,10 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     // height: Platform.OS === "ios" ? 50 : 100,
     flex: 1,
-    backgroundColor: "#fff",
+
     padding: 16,
-    // justifyContent: "space-evenly",
-    // alignItems: "center",
   },
-  makoPhotoBox: {
+  makePhotoBox: {
     height: 240,
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
@@ -79,7 +77,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   trashContainer: {
-    // justifyContent: "center",
+    marginBottom: 6,
     alignItems: "center",
+  },
+  content: {
+    justifyContent: "space-between",
+    flex: 1,
+  },
+  scroll: {
+    flexGrow: 1,
+  },
+  box: {
+    // flexGrow:
+    // backgroundColor: "green",
+    // marginBottom: 10,
   },
 });
