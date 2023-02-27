@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 
     padding: 16,
   },
-  makePhotoBox: {
+  camera: {
     height: 240,
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 50,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -91,5 +91,17 @@ export const styles = StyleSheet.create({
     // flexGrow:
     // backgroundColor: "green",
     // marginBottom: 10,
+  },
+  flipButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  photoContainer: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    borderColor: "#fff",
+    borderWidth: 1,
   },
 });

@@ -1,4 +1,4 @@
-const { View, Text } = require("react-native");
+// const { View, Text } = require("react-native");
 import { styles } from "../main/styles/commentsStyles";
 
 import {
