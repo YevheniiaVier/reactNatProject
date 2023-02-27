@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-// import * as Location from "expo-location";
+import * as Location from "expo-location";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 const {
@@ -27,7 +27,9 @@ export const CreatePostsScreen = ({ navigation }) => {
     Camera.useCameraPermissions();
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const [isFocused, setIsFocused] = useState({
     title: false,
     location: false,
@@ -45,18 +47,18 @@ export const CreatePostsScreen = ({ navigation }) => {
     getCameraPermission();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       setErrorMsg("Permission to access location was denied");
-  //       return;
-  //     }
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
 
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location);
-  //   })();
-  // }, []);
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location.coords);
+    })();
+  }, []);
 
   const titleHandler = (value) => setTitle(value);
   const locationHandler = (value) => setLocation(value);
@@ -71,8 +73,8 @@ export const CreatePostsScreen = ({ navigation }) => {
     // console.log(isCameraReady, "isCamera is Ready!");
 
     const { uri } = await cameraRef.takePictureAsync();
-    // const location = await Location.getCurrentPositionAsync();
-    // console.log(location);
+    const location = await Location.getCurrentPositionAsync();
+    console.log(location);
     await MediaLibrary.createAssetAsync(uri);
     setPhoto(uri);
   };
@@ -178,7 +180,15 @@ export const CreatePostsScreen = ({ navigation }) => {
                   </View>
                   <TouchableOpacity
                     activeOpacity={0.7}
-                    style={styles.postBtn}
+                    style={{
+                      ...styles.postBtn,
+                      backgroundColor:
+                        title?.length === 0 ||
+                        location?.length === 0 ||
+                        photo == null
+                          ? "#F6F6F6"
+                          : "#FF6C00",
+                    }}
                     onPress={onPosting}
                   >
                     <Text style={styles.btnTitle}>Опублікувати</Text>

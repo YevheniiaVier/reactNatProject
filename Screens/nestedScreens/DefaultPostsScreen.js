@@ -21,6 +21,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
   // const { logIn } = route.params;
 
   const renderItem = ({ item }) => {
+    console.log(item, "item");
     return (
       <View
         style={styles.postBox}
@@ -32,14 +33,18 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.commentsBox}
-            // onPress={...logic}
+            onPress={() => {
+              navigation.navigate("Comments");
+            }}
           >
             <FontAwesome name="comment-o" size={24} color="#BDBDBD" />
             <Text style={styles.commentCount}>0</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            // onPress={...logic}
+            onPress={() => {
+              navigation.navigate("Map", { location: item.location });
+            }}
             style={styles.locationBox}
           >
             <SimpleLineIcons name="location-pin" size={24} color="#BDBDBD" />

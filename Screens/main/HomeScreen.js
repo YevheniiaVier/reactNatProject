@@ -31,13 +31,13 @@ export const HomeScreen = ({ navigation }) => {
     >
       <Tab.Screen
         options={{
-          title: "Публікації",
-          headerTintColor: "#212121",
-          headerTitleStyle: {
-            fontFamily: "Roboto-Bold",
-            fontSize: 17,
-          },
-
+          headerShown: false,
+          // title: "Публікації",
+          // headerTintColor: "#212121",
+          // headerTitleStyle: {
+          //   fontFamily: "Roboto-Bold",
+          //   fontSize: 17,
+          // },
           tabBarIcon: ({ focused, size, color }) => (
             <AntDesign
               name="appstore-o"
@@ -45,26 +45,25 @@ export const HomeScreen = ({ navigation }) => {
               color="rgba(33, 33, 33, 0.8)"
             />
           ),
-          headerStyle: {
-            backgroundColor: "#FFFFFF",
-            borderBottomWidth: 1,
-            shadowColor: "rgba(0, 0, 0, 0.3)",
-            shadowOpacity: 1,
-            elevation: 3,
-          },
-          headerRight: () => (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => {
-                // Handle logout action here
-              }}
-              style={styles.logoutBtn}
-            >
-              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
-            </TouchableOpacity>
-          ),
-
-          headerTitleAlign: "center",
+          // headerStyle: {
+          //   backgroundColor: "#FFFFFF",
+          //   borderBottomWidth: 1,
+          //   shadowColor: "rgba(0, 0, 0, 0.3)",
+          //   shadowOpacity: 1,
+          //   elevation: 3,
+          // },
+          // headerRight: () => (
+          //   <TouchableOpacity
+          //     activeOpacity={0.7}
+          //     onPress={() => {
+          //       // Handle logout action here
+          //     }}
+          //     style={styles.logoutBtn}
+          //   >
+          //     <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+          //   </TouchableOpacity>
+          // ),
+          // headerTitleAlign: "center",
         }}
         name="PostsScreen"
         component={PostsScreen}
