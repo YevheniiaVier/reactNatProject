@@ -45,6 +45,19 @@ export const CreatePostsScreen = ({ navigation }) => {
     getCameraPermission();
   }, []);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       setErrorMsg("Permission to access location was denied");
+  //       return;
+  //     }
+
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation(location);
+  //   })();
+  // }, []);
+
   const titleHandler = (value) => setTitle(value);
   const locationHandler = (value) => setLocation(value);
 
