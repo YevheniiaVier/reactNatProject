@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+// import * as Location from "expo-location";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 const {
@@ -36,10 +37,11 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [photo, setPhoto] = useState("");
 
   useEffect(() => {
-    async function getCameraPermission() {
+    const getCameraPermission = async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(status === "granted");
-    }
+    };
     getCameraPermission();
   }, []);
 
@@ -52,10 +54,12 @@ export const CreatePostsScreen = ({ navigation }) => {
   };
 
   const takePhoto = async () => {
-    if (!isCameraReady) {
-      console.log("Camera is not ready!");
-    }
+    // if (isCameraReady) {
+    // console.log(isCameraReady, "isCamera is Ready!");
+
     const { uri } = await cameraRef.takePictureAsync();
+    // const location = await Location.getCurrentPositionAsync();
+    // console.log(location);
     await MediaLibrary.createAssetAsync(uri);
     setPhoto(uri);
   };
@@ -71,7 +75,9 @@ export const CreatePostsScreen = ({ navigation }) => {
   const onPosting = () => {
     console.log(title);
     console.log(location);
-    // navigation.navigate("Posts");
+    console.log("photo", photo);
+
+    navigation.navigate("DefaultPosts", { photo });
     setTitle("");
     setLocation("");
   };
@@ -99,7 +105,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                     <View style={styles.photoContainer}>
                       <Image
                         source={{ uri: photo }}
-                        style={{ height: 100, width: 100 }}
+                        style={{ height: 70, width: 80 }}
                       />
                     </View>
                   )}

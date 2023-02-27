@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
+
 import { styles } from "../main/styles/postScreenStyles";
 
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import initialPosts from "../main/initialPosts.json";
+// import initialPosts from "../main/initialPosts.json";
 
 export const DefaultPostsScreen = ({ navigation, route }) => {
-  const [posts, setPosts] = useState([...initialPosts]);
+  const [posts, setPosts] = useState([]);
+  console.log(route, "route.params");
 
   useEffect(() => {
     if (route.params) {
       setPosts((prevState) => [...prevState, route.params]);
+      console.log(posts, "posts");
     }
   }, [route.params]);
 
@@ -23,10 +26,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
         style={styles.postBox}
         // onPress={onPress}
       >
-        <Image
-          source={require("../../assets/images/posts/post-img1.jpg")}
-          style={styles.postImg}
-        />
+        <Image source={{ uri: item.photo }} style={styles.postImg} />
         <Text style={styles.postImgText}>{item.description}</Text>
         <View style={styles.description}>
           <TouchableOpacity
@@ -66,7 +66,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
       </View>
       <FlatList
         data={posts}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString}
         renderItem={renderItem}
       />
     </View>

@@ -5,7 +5,8 @@ import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 
 const NestedScreen = createStackNavigator();
 
-export const PostsScreen = () => {
+export const PostsScreen = ({ route }) => {
+  // console.log(route, "route.params");
   return (
     <NestedScreen.Navigator>
       <NestedScreen.Screen

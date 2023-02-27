@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     top: -34,
     zIndex: 1,
   },
-  imgWrap: {
+  imgBox: {
     width: "100%",
     height: 240,
   },
@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 16,
   },
-  commentsListWrap: {
+  commentsContainer: {
     flex: 1,
     marginTop: 32,
   },
-  commentsInputWrap: {
+  commentsInputBox: {
     marginBottom: 16,
     marginTop: 16,
     position: "relative",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     fontSize: 16,
   },
-  commentsSubmitBtn: {
+  submitBtn: {
     position: "absolute",
     top: "50%",
     transform: [{ translateY: -17 }],
