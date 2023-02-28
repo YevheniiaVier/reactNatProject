@@ -6,52 +6,60 @@ export const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  goBackBtn: {
-    position: "absolute",
-    left: 16,
-    top: -34,
-    zIndex: 1,
+  profileContainer: {
+    // marginTop: 16,
+    // marginBottom: 32,
+    // flexDirection: "row",
+    // alignItems: "center",
   },
   imgBox: {
-    width: "100%",
-    height: 240,
+    width: 28,
+    height: 28,
+    borderRadius: 50,
+    // marginRight: 8,
   },
-  img: {
+  avatar: {
     width: "100%",
     flex: 1,
     resizeMode: "cover",
     borderRadius: 16,
+    overflow: "hidden",
   },
-  commentsContainer: {
-    flex: 1,
-    marginTop: 32,
+
+  postBox: {
+    // marginBottom: 32,
   },
-  commentsInputBox: {
-    marginBottom: 16,
-    marginTop: 16,
-    position: "relative",
+  postImg: {
+    height: 240,
+    width: "100%",
+    borderRadius: 8,
+    marginBottom: 8,
   },
-  commentsInput: {
-    height: 50,
-    paddingLeft: 16,
-    paddingRight: 42,
-    backgroundColor: "#E8E8E8",
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    borderRadius: 25,
-    fontFamily: "Roboto-Regular",
-    fontSize: 16,
-  },
-  submitBtn: {
-    position: "absolute",
-    top: "50%",
-    transform: [{ translateY: -17 }],
-    right: 8,
+  commentBtn: {
     width: 34,
     height: 34,
     backgroundColor: "#FF6C00",
-    justifyContent: "center",
     alignItems: "center",
-    borderRadius: 17,
+    justifyContent: "center",
+    borderRadius: 50,
+    position: "absolute",
+
+    top: 8,
+    right: 8,
+  },
+  commentInput: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+    backgroundColor: "F6F6F6",
+    borderRadius: 100,
+    padding: 16,
+    fontSize: 16,
+    marginBottom: 16,
+  },
+
+  inner: {
+    flex: 1,
+    justifyContent: "space-between",
   },
 });

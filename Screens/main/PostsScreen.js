@@ -9,7 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles/mainStyles";
 const NestedScreen = createStackNavigator();
 
-export const PostsScreen = ({ route }) => {
+export const PostsScreen = ({ navigation, route }) => {
   // console.log(route, "route.params");
   return (
     <NestedScreen.Navigator>
@@ -53,11 +53,73 @@ export const PostsScreen = ({ route }) => {
         name="DefaultPosts"
         component={DefaultPostsScreen}
       />
-      <NestedScreen.Screen name="Comments" component={CommentsScreen} />
       <NestedScreen.Screen
-        // options={{
-        //   headerShown: false,
-        // }}
+        options={{
+          title: "Коментарі",
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontFamily: "Roboto-Bold",
+            fontSize: 17,
+          },
+
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            borderBottomWidth: 1,
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowOpacity: 1,
+            elevation: 3,
+          },
+
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate("DefaultPosts")}
+              style={styles.backBtn}
+            >
+              <MaterialIcons
+                name="keyboard-backspace"
+                size={24}
+                color="rgba(33, 33, 33, 0.8)"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: "center",
+        }}
+        name="Comments"
+        component={CommentsScreen}
+      />
+      <NestedScreen.Screen
+        options={{
+          title: "Мапа",
+          headerTintColor: "#212121",
+          headerTitleStyle: {
+            fontFamily: "Roboto-Bold",
+            fontSize: 17,
+          },
+
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            borderBottomWidth: 1,
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowOpacity: 1,
+            elevation: 3,
+          },
+
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate("DefaultPosts")}
+              style={styles.backBtn}
+            >
+              <MaterialIcons
+                name="keyboard-backspace"
+                size={24}
+                color="rgba(33, 33, 33, 0.8)"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: "center",
+        }}
         name="Map"
         component={MapScreen}
       />
