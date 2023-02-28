@@ -37,20 +37,40 @@ export const CommentsScreen = ({ navigate, route }) => {
     let min = new Date().getMinutes();
     //Get Current Time Seconds
     let sec = new Date().getSeconds();
-    let currentTime =
+    const currentTime =
       date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec;
-    setDateTime(currentTime);
+    return currentTime;
+    // setDateTime(currentTime);
   };
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const commentHandler = (value) => {
-    setUserComment(value);
-    getCurrentDateDate();
-  };
+  const commentHandler = (value) => setUserComment(value);
+
   const onComment = () => {
-    setComments((prevState) => ({ ...prevState, userComment }));
+    const date = getCurrentDateDate();
+    const newComment = { comment: userComment, date };
+    setComments((prevState) => [...prevState, newComment]);
   };
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.commentsBox}>
+        <View style={styles.postBox}>
+          <Image source={{ uri: photo }} style={styles.postImg} />
+        </View>
+
+        <View style={styles.imgBox}>
+          <Image
+            source={require("../../assets/images/avatar.jpg")}
+            style={styles.avatar}
+          />
+        </View>
+        <Text>{item.userComment}</Text>
+      </View>
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -62,15 +82,11 @@ export const CommentsScreen = ({ navigate, route }) => {
             <View style={styles.postBox}>
               <Image source={{ uri: photo }} style={styles.postImg} />
             </View>
-            <View style={styles.commentsBox}>
-              <View style={styles.imgBox}>
-                <Image
-                  source={require("../../assets/images/avatar.jpg")}
-                  style={styles.avatar}
-                />
-              </View>
-              <Text>{userComment}</Text>
-            </View>
+            <FlatList
+              data={comments}
+              keyExtractor={(item, index) => index.toString}
+              renderItem={renderItem}
+            />
           </View>
           <View style={styles.input}>
             <TextInput
