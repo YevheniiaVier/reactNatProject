@@ -18,7 +18,8 @@ export const MapScreen = ({ navigation, route }) => {
           longitudeDelta: 0.1,
         }}
       >
-        <Marker coordinate={{ latitude, longitude }} />
+        <Marker title="Я тутоньки"
+          coordinate={{ latitude, longitude }} />
       </MapView>
       {/* </View> */}
     </View>

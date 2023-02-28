@@ -63,4 +63,17 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   commentsBox: {},
+  commentText: {
+    fontSize: 13,
+    lineHeight: 18,
+    color: "#212121",
+    fontFamily: "Roboto-Regular",
+    marginBottom: 8,
+  },
+  commentDate: {
+    fontSize: 10,
+    lineHeight: 12,
+    color: "#BDBDBD",
+    fontFamily: "Roboto-Regular",
+  },
 });

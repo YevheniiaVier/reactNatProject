@@ -25,22 +25,29 @@ export const CommentsScreen = ({ navigate, route }) => {
   const { photo } = route.params;
 
   const getCurrentDateDate = () => {
-    //Get Current Date
-    let date = new Date().getDate();
-    //Get Current Month
-    let month = new Date().getMonth() + 1;
-    //Get Current Year
-    let year = new Date().getFullYear();
-    //Get Current Time Hours
-    let hours = new Date().getHours();
-    //Get Current Time Minutes
-    let min = new Date().getMinutes();
-    //Get Current Time Seconds
-    let sec = new Date().getSeconds();
+    const months = [
+      "січня",
+      "лютого",
+      "березня",
+      "квітня",
+      "травня",
+      "червня",
+      "липня",
+      "серпня",
+      "вересня",
+      "жовтня",
+      "листопада",
+      "грудня",
+    ];
+    const date = new Date();
+    let day = date.getDate();
+    let monthName = months[date.getMonth()];
+    let year = date.getFullYear();
+    let hours = date.getHours();
+    let min = date.getMinutes();
     const currentTime =
-      date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec;
+      day + " " + monthName + ", " + year + " | " + hours + ":" + min;
     return currentTime;
-    // setDateTime(currentTime);
   };
   const dismissKeyboard = () => {
     Keyboard.dismiss();
@@ -51,22 +58,20 @@ export const CommentsScreen = ({ navigate, route }) => {
     const date = getCurrentDateDate();
     const newComment = { comment: userComment, date };
     setComments((prevState) => [...prevState, newComment]);
+    setUserComment("");
   };
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.commentsBox}>
-        <View style={styles.postBox}>
-          <Image source={{ uri: photo }} style={styles.postImg} />
-        </View>
-
         <View style={styles.imgBox}>
           <Image
             source={require("../../assets/images/avatar.jpg")}
             style={styles.avatar}
           />
         </View>
-        <Text>{item.userComment}</Text>
+        <Text style={styles.commentText}>{item.comment}</Text>
+        <Text style={styles.commentDate}>{item.date}</Text>
       </View>
     );
   };
