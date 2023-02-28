@@ -28,6 +28,7 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState(null);
+  const [locationCoords, setLocationCoords] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [isFocused, setIsFocused] = useState({
@@ -54,9 +55,10 @@ export const CreatePostsScreen = ({ navigation }) => {
         setErrorMsg("Permission to access location was denied");
         return;
       }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location.coords);
+      const { coords } = await Location.getCurrentPositionAsync({});
+      console.log(coords, " location");
+      setLocationCoords(coords);
+      console.log(locationCoords, "coords");
     })();
   }, []);
 
@@ -73,10 +75,10 @@ export const CreatePostsScreen = ({ navigation }) => {
     // console.log(isCameraReady, "isCamera is Ready!");
 
     const { uri } = await cameraRef.takePictureAsync();
-    const location = await Location.getCurrentPositionAsync();
-    console.log(location);
+
     await MediaLibrary.createAssetAsync(uri);
     setPhoto(uri);
+    console.log(locationCoords, "coords");
   };
 
   const toggleCameraType = () => {
@@ -87,14 +89,24 @@ export const CreatePostsScreen = ({ navigation }) => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  const onPosting = () => {
-    console.log(title);
-    console.log(location);
-    console.log("photo", photo);
+  const onPosting = async () => {
+    if (photo === "") {
+      return;
+    }
+    // console.log(title);
+    // console.log(location);
+    // console.log("photo", photo);
 
-    navigation.navigate("DefaultPosts", { photo });
+    navigation.navigate("DefaultPosts", {
+      photo,
+      location,
+      title,
+      locationCoords,
+    });
     setTitle("");
     setLocation("");
+    // setLocationCoords(null);
+    setPhoto(null);
   };
   const handleInputFocus = (value) => {
     setIsFocused((prevState) => ({ ...prevState, [value]: true }));
@@ -103,6 +115,12 @@ export const CreatePostsScreen = ({ navigation }) => {
     setIsFocused((prevState) => ({ ...prevState, [value]: false }));
   };
 
+  const onClear = () => {
+    setTitle("");
+    setLocation("");
+    // setLocationCoords(null);
+    setPhoto(null);
+  };
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles.container}>
@@ -200,7 +218,7 @@ export const CreatePostsScreen = ({ navigation }) => {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.deleteBtn}
-                  onPress={onPosting}
+                  onPress={onClear}
                 >
                   <FontAwesome5 name="trash-alt" size={24} color="#DADADA" />
                 </TouchableOpacity>

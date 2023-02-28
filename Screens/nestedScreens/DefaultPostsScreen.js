@@ -9,7 +9,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 export const DefaultPostsScreen = ({ navigation, route }) => {
   const [posts, setPosts] = useState([]);
-  console.log(route, "route.params");
+  console.log(route, "route defaults");
 
   useEffect(() => {
     if (route.params) {
@@ -21,20 +21,23 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
   // const { logIn } = route.params;
 
   const renderItem = ({ item }) => {
-    console.log(item, "item");
+    console.log(item.locationCoords, "item locate in Render");
     return (
       <View
         style={styles.postBox}
         // onPress={onPress}
       >
         <Image source={{ uri: item.photo }} style={styles.postImg} />
-        <Text style={styles.postImgText}>{item.description}</Text>
+        <Text style={styles.postImgText}>{item.title}</Text>
         <View style={styles.description}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.commentsBox}
             onPress={() => {
-              navigation.navigate("Comments");
+              navigation.navigate("Comments", {
+                photo: item.photo,
+                // postId: item.id
+              });
             }}
           >
             <FontAwesome name="comment-o" size={24} color="#BDBDBD" />
@@ -43,7 +46,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => {
-              navigation.navigate("Map", { location: item.location });
+              navigation.navigate("Map", { location: item.locationCoords });
             }}
             style={styles.locationBox}
           >
