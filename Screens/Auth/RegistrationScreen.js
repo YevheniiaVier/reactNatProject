@@ -12,7 +12,10 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import { styles } from "./styles";
+
+import { authSignUp } from "../../redux/auth/auth-operations";
 
 export const RegistrationScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -26,6 +29,8 @@ export const RegistrationScreen = ({ navigation }) => {
     email: false,
     password: false,
   });
+
+  const dispatch = useDispatch();
 
   const nameHandler = (value) => setName(value);
   const passwordHandler = (value) => setPassword(value);
@@ -47,10 +52,13 @@ export const RegistrationScreen = ({ navigation }) => {
 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
+    setIsShowKeyboard(false);
   };
   const onRegister = () => {
-    console.log({ name, password, email });
-    navigation.navigate("Home");
+    dismissKeyboard();
+    dispatch(authSignUp({ name, password, email }));
+
+    // navigation.navigate("Home");
     setEmail("");
     setName("");
     setPassword("");
@@ -73,7 +81,7 @@ export const RegistrationScreen = ({ navigation }) => {
           source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
             <View style={styles.form}>
               <Text style={styles.formTitle}>Реєстрація</Text>

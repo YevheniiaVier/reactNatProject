@@ -13,6 +13,10 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 
+import { useDispatch } from "react-redux";
+
+import { authSignIn } from "../../redux/auth/auth-operations";
+
 export const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +28,7 @@ export const LoginScreen = ({ navigation }) => {
     email: false,
     password: false,
   });
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const passwordHandler = (value) => setPassword(value);
@@ -45,11 +50,14 @@ export const LoginScreen = ({ navigation }) => {
 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
+    setIsShowKeyboard(false);
   };
   const onLogin = () => {
+    dismissKeyboard();
+    dispatch(authSignIn({ email, password }));
     console.log(password);
     console.log(email);
-    navigation.navigate("Home");
+    // navigation.navigate("Home");
     setEmail("");
     setPassword("");
   };
@@ -71,7 +79,7 @@ export const LoginScreen = ({ navigation }) => {
           source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
             <View style={{ ...styles.form, paddingTop: 32 }}>
               <Text style={styles.formTitle}>Увійти</Text>

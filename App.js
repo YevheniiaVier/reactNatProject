@@ -19,7 +19,7 @@ export default function App({ navigation, route }) {
     "Roboto-Bold": RobotoBold,
     "Roboto-Medium": RobotoMedium,
   });
-  const routing = userRoute({});
+  const routing = userRoute(false);
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
