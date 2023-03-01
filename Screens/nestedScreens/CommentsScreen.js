@@ -79,6 +79,7 @@ export const CommentsScreen = ({ navigate, route }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 122}
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={dismissKeyboard}>

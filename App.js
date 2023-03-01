@@ -1,7 +1,7 @@
 import { useFonts } from "expo-font";
-// import { Context } from "./context";
 import { useState } from "react";
-// import { createContext } from "react";
+import { Provider } from "react-redux";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
 import { userRoute } from "./router";
@@ -9,6 +9,7 @@ import { userRoute } from "./router";
 const RobotoRegular = require("./assets/fonts/Roboto/Roboto-Regular.ttf");
 const RobotoBold = require("./assets/fonts/Roboto/Roboto-Bold.ttf");
 const RobotoMedium = require("./assets/fonts/Roboto/Roboto-Medium.ttf");
+import { store } from "./redux/store";
 
 export default function App({ navigation, route }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,5 +24,9 @@ export default function App({ navigation, route }) {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
+  );
 }
