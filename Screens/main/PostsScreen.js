@@ -3,14 +3,22 @@ import { DefaultPostsScreen } from "../nestedScreens/DefaultPostsScreen";
 import { MapScreen } from "../nestedScreens/MapScreen";
 import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 import { TouchableOpacity, View } from "react-native";
-
+import { useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles/mainStyles";
+
+import { authSignOutUser } from "../../redux/auth/auth-operations";
 const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation, route }) => {
   // console.log(route, "route.params");
+  const dispatch = useDispatch();
+  const signOut = () => {
+    console.log("sighn out posts");
+    dispatch(authSignOutUser());
+  };
+
   return (
     <NestedScreen.Navigator>
       <NestedScreen.Screen
@@ -39,9 +47,7 @@ export const PostsScreen = ({ navigation, route }) => {
           headerRight: () => (
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => {
-                // Handle logout action here
-              }}
+              onPress={signOut}
               style={styles.logoutBtn}
             >
               <MaterialIcons name="logout" size={24} color="#BDBDBD" />

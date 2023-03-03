@@ -81,7 +81,7 @@ export const RegistrationScreen = ({ navigation }) => {
           source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS === "ios" ? "padding" : null}
           >
             <View style={styles.form}>
               <Text style={styles.formTitle}>Реєстрація</Text>

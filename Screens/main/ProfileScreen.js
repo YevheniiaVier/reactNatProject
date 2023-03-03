@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
 import {
   Text,
   View,
@@ -8,16 +8,28 @@ import {
   Image,
   FlatList,
 } from "react-native";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+
+import { db, auth } from "../../firebase/config.js";
 
 import { styles } from "./styles/profileStyles.js";
 import initialPosts from "./initialPostsProfile.json";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
+import { authSignOutUser } from "../../redux/auth/auth-operations.js";
+
 export const ProfileScreen = () => {
   const [posts, setPosts] = useState([...initialPosts]);
+  const dispatch = useDispatch();
+
+  const signOut = () => {
+    console.log("sign out profile");
+
+    dispatch(authSignOutUser());
+  };
 
   const renderItem = ({ item }) => {
     return (
@@ -68,9 +80,7 @@ export const ProfileScreen = () => {
         <View style={styles.content}>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => {
-              // Handle logout action here
-            }}
+            onPress={signOut}
             style={styles.logoutBtn}
           >
             <MaterialIcons name="logout" size={24} color="#BDBDBD" />

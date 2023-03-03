@@ -55,8 +55,6 @@ export const LoginScreen = ({ navigation }) => {
   const onLogin = () => {
     dismissKeyboard();
     dispatch(authSignIn({ email, password }));
-    console.log(password);
-    console.log(email);
     // navigation.navigate("Home");
     setEmail("");
     setPassword("");
@@ -79,7 +77,7 @@ export const LoginScreen = ({ navigation }) => {
           source={require("../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS === "ios" ? "padding" : null}
           >
             <View style={{ ...styles.form, paddingTop: 32 }}>
               <Text style={styles.formTitle}>Увійти</Text>
