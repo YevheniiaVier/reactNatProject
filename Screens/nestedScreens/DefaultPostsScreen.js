@@ -1,27 +1,29 @@
 import { useState, useEffect } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-
+import { db, storage } from "../../firebase/config";
 import { styles } from "../main/styles/postScreenStyles";
-
+import { collection, getDocs } from "firebase/firestore";
+import { useSelector } from "react-redux";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 // import initialPosts from "../main/initialPosts.json";
 
 export const DefaultPostsScreen = ({ navigation, route }) => {
   const [posts, setPosts] = useState([]);
-  console.log(route, "route defaults");
+  const { name } = useSelector((state) => state.auth);
+  const getAllPost = async () => {
+    const postsSnapshot = await getDocs(collection(db, "posts"));
+    console.log(postsSnapshot);
+
+    setPosts(postsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
   useEffect(() => {
-    if (route.params) {
-      setPosts((prevState) => [...prevState, route.params]);
-      console.log(posts, "posts");
-    }
-  }, [route.params]);
-
-  // const { logIn } = route.params;
+    getAllPost();
+  }, []);
 
   const renderItem = ({ item }) => {
-    console.log(item.locationCoords, "item locate in Render");
+    // console.log(item.locationCoords, "item locate in Render");
     return (
       <View
         style={styles.postBox}
@@ -35,8 +37,8 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
             style={styles.commentsBox}
             onPress={() => {
               navigation.navigate("Comments", {
+                postId: item.id,
                 photo: item.photo,
-                // postId: item.id
               });
             }}
           >
@@ -68,13 +70,13 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.profileInfoBox}>
-          <Text style={styles.profileName}>Natali Romanova</Text>
+          <Text style={styles.profileName}>{name}</Text>
           <Text style={styles.profileEmail}>email@example.com</Text>
         </View>
       </View>
       <FlatList
         data={posts}
-        keyExtractor={(item, index) => index.toString}
+        keyExtractor={(item, index) => item.id}
         renderItem={renderItem}
       />
     </View>

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Text,
   View,
@@ -12,42 +12,55 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 import { db, auth } from "../../firebase/config.js";
 
 import { styles } from "./styles/profileStyles.js";
-import initialPosts from "./initialPostsProfile.json";
+// import initialPosts from "./initialPostsProfile.json";
 import { SimpleLineIcons } from "@expo/vector-icons";
-
 import { authSignOutUser } from "../../redux/auth/auth-operations.js";
 
-export const ProfileScreen = () => {
-  const [posts, setPosts] = useState([...initialPosts]);
+export const ProfileScreen = ({ navigation }) => {
+  const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
+  const { name, userId } = useSelector((state) => state.auth);
+
+  const getUserPosts = async () => {
+    const postsRef = await collection(db, "posts");
+    const data = await query(postsRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(data);
+    setPosts(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  useEffect(() => {
+    getUserPosts();
+  }, []);
 
   const signOut = () => {
-    console.log("sign out profile");
-
     dispatch(authSignOutUser());
   };
 
   const renderItem = ({ item }) => {
+    console.log(item, "item in profile render list");
     return (
       <View
         style={styles.postBox}
         // onPress={onPress}
       >
-        <Image
-          source={require("../../assets/images/posts/post-img1.jpg")}
-          style={styles.postImg}
-        />
+        <Image source={{ uri: item.photo }} style={styles.postImg} />
         <Text style={styles.postImgText}>{item.description}</Text>
         <View style={styles.description}>
           <View style={styles.commentsWrapper}>
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.commentsBox}
-              // onPress={...logic}
+              onPress={() => {
+                navigation.navigate("Comments", {
+                  postId: item.id,
+                  photo: item.photo,
+                });
+              }}
             >
               <FontAwesome name="comment" size={18} color="#FF6C00" />
               <Text style={styles.commentCount}>3</Text>
@@ -60,7 +73,9 @@ export const ProfileScreen = () => {
 
           <TouchableOpacity
             activeOpacity={0.7}
-            // onPress={...logic}
+            onPress={() => {
+              navigation.navigate("Map", { location: item.locationCoords });
+            }}
             style={styles.locationBox}
           >
             <SimpleLineIcons name="location-pin" size={18} color="#BDBDBD" />
@@ -101,7 +116,7 @@ export const ProfileScreen = () => {
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.profileName}>Natali Romanova</Text>
+          <Text style={styles.profileName}>{name}</Text>
           <FlatList
             data={posts}
             keyExtractor={(item) => item.id}

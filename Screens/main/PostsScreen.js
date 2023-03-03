@@ -79,7 +79,7 @@ export const PostsScreen = ({ navigation, route }) => {
           headerLeft: (props) => (
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => navigation.navigate("DefaultPosts")}
+              onPress={() => navigation.goBack()}
               style={styles.backBtn}
             >
               <MaterialIcons

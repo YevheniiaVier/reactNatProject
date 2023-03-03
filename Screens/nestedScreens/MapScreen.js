@@ -3,12 +3,11 @@ import MapView, { Marker } from "react-native-maps";
 const { View, Text } = require("react-native");
 import { styles } from "../main/styles/mapStyles";
 
-export const MapScreen = ({ navigation, route }) => {
+export const MapScreen = ({ route }) => {
   console.log(route.params, "map");
   const { latitude, longitude } = route.params.location;
   return (
     <View style={styles.container}>
-      {/* <View style={styles.mapBox}> */}
       <MapView
         style={styles.map}
         initialRegion={{
@@ -18,10 +17,8 @@ export const MapScreen = ({ navigation, route }) => {
           longitudeDelta: 0.1,
         }}
       >
-        <Marker title="Я тутоньки"
-          coordinate={{ latitude, longitude }} />
+        <Marker title="тутоньки" coordinate={{ latitude, longitude }} />
       </MapView>
-      {/* </View> */}
     </View>
   );
 };

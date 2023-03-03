@@ -1,6 +1,9 @@
 // const { View, Text } = require("react-native");
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { styles } from "../main/styles/commentsStyles";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import {
   StyleSheet,
   Text,
@@ -22,8 +25,12 @@ export const CommentsScreen = ({ navigate, route }) => {
   const [userComment, setUserComment] = useState("");
   const [comments, setComments] = useState([]);
   const [date, setDateTime] = useState("");
-  const { photo } = route.params;
-
+  // const { photo } = route.params;
+  const { name } = useSelector((state) => state.auth);
+  const { postId, photo } = route.params;
+  useEffect(() => {
+    getAllComments();
+  }, []);
   const getCurrentDateDate = () => {
     const months = [
       "січня",
@@ -54,14 +61,30 @@ export const CommentsScreen = ({ navigate, route }) => {
   };
   const commentHandler = (value) => setUserComment(value);
 
-  const onComment = () => {
+  const addComment = async () => {
     const date = getCurrentDateDate();
-    const newComment = { comment: userComment, date };
-    setComments((prevState) => [...prevState, newComment]);
+    const docRef = await addDoc(collection(db, `posts/${postId}`, "comments"), {
+      userComment,
+      name,
+      date,
+    });
+    dismissKeyboard();
+    // const newComment = { comment: userComment, date };
+    // setComments((prevState) => [...prevState, newComment]);
     setUserComment("");
   };
 
+  const getAllComments = async () => {
+    const querySnapshot = await getDocs(
+      collection(db, `posts/${postId}/comments`)
+    );
+    setComments(
+      querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    );
+  };
+
   const renderItem = ({ item }) => {
+    console.log(item);
     return (
       <View style={styles.commentsBox}>
         <View style={styles.imgBox}>
@@ -70,7 +93,7 @@ export const CommentsScreen = ({ navigate, route }) => {
             style={styles.avatar}
           />
         </View>
-        <Text style={styles.commentText}>{item.comment}</Text>
+        <Text style={styles.commentText}>{item.userComment}</Text>
         <Text style={styles.commentDate}>{item.date}</Text>
       </View>
     );
@@ -90,7 +113,7 @@ export const CommentsScreen = ({ navigate, route }) => {
             </View>
             <FlatList
               data={comments}
-              keyExtractor={(item, index) => index.toString}
+              keyExtractor={(item, index) => item.id}
               renderItem={renderItem}
             />
           </View>
@@ -102,7 +125,7 @@ export const CommentsScreen = ({ navigate, route }) => {
               onChangeText={commentHandler}
               style={styles.commentInput}
             />
-            <TouchableOpacity style={styles.commentBtn} onPress={onComment}>
+            <TouchableOpacity style={styles.commentBtn} onPress={addComment}>
               <AntDesign name="arrowup" size={14} color="#ffffff" />
             </TouchableOpacity>
           </View>
