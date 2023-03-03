@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
@@ -15,8 +16,14 @@ const {
   Image,
 } = require("react-native");
 
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
+
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+
+import { db, storage } from "../../firebase/config";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { styles } from "./styles/cratePostScreenStyles";
@@ -30,15 +37,15 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [locationCoords, setLocationCoords] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [photo, setPhoto] = useState("");
 
   const [isFocused, setIsFocused] = useState({
     title: false,
     location: false,
   });
 
-  const [cameraRef, setCameraRef] = useState(null);
-  const [photo, setPhoto] = useState("");
-
+  const { userId, name } = useSelector((state) => state.auth);
   useEffect(() => {
     const getCameraPermission = async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -56,9 +63,9 @@ export const CreatePostsScreen = ({ navigation }) => {
         return;
       }
       const { coords } = await Location.getCurrentPositionAsync({});
-      console.log(coords, " location");
+      // console.log(coords, " location");
       setLocationCoords(coords);
-      console.log(locationCoords, "coords");
+      // console.log(locationCoords, "coords");
     })();
   }, []);
 
@@ -67,7 +74,7 @@ export const CreatePostsScreen = ({ navigation }) => {
 
   const handleCameraReady = () => {
     setIsCameraReady(true);
-    console.log("Camera is ready!");
+    // console.log("Camera is ready!");
   };
 
   const takePhoto = async () => {
@@ -78,7 +85,7 @@ export const CreatePostsScreen = ({ navigation }) => {
 
     await MediaLibrary.createAssetAsync(uri);
     setPhoto(uri);
-    console.log(locationCoords, "coords");
+    // console.log(locationCoords, "coords");
   };
 
   const toggleCameraType = () => {
@@ -89,12 +96,43 @@ export const CreatePostsScreen = ({ navigation }) => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
+  const uploadPhotoToServer = async () => {
+    const response = await fetch(photo);
+    const file = await response.blob();
+    const uniquePostId = Date.now().toString();
+    const imgRef = ref(storage, `postImages/${uniquePostId}`);
+    await uploadBytes(imgRef, file);
+
+    const processedPhoto = await getDownloadURL(
+      ref(storage, `postImages/${uniquePostId}`)
+    );
+    return processedPhoto;
+    // console.log(processedPhoto, "processedPhoto");
+  };
+
+  const uploadPostToServer = async () => {
+    const photo = await uploadPhotoToServer();
+    try {
+      const postRef = await addDoc(collection(db, "posts"), {
+        photo,
+        title,
+        location,
+        locationCoords,
+        userId,
+        name,
+      });
+      console.log("Document written with ID: ", postRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
   const onPosting = async () => {
     if (photo === "") {
       return;
     }
+    uploadPostToServer();
     // console.log(title);
-    // console.log(location);
+    // console.log(locationCoords, "location in onPosting");
     // console.log("photo", photo);
 
     navigation.navigate("DefaultPosts", {
@@ -121,6 +159,7 @@ export const CreatePostsScreen = ({ navigation }) => {
     // setLocationCoords(null);
     setPhoto(null);
   };
+
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles.container}>
