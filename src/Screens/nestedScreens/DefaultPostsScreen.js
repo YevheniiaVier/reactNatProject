@@ -23,7 +23,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
   }, []);
 
   const renderItem = ({ item }) => {
-    // console.log(item.locationCoords, "item locate in Render");
+    console.log(item, "item  in Render");
     return (
       <View
         style={styles.postBox}
@@ -65,7 +65,7 @@ export const DefaultPostsScreen = ({ navigation, route }) => {
       <View style={styles.profileContainer}>
         <View style={styles.imgBox}>
           <Image
-            source={require("../../assets/images/userImg.jpg")}
+            source={require("../../../assets/images/userImg.jpg")}
             style={styles.userAvatar}
           />
         </View>

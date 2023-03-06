@@ -90,7 +90,7 @@ export const ProfileScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.bcg}
-        source={require("../../assets/images/bcgimg.jpg")}
+        source={require("../../../assets/images/bcgimg.jpg")}
       >
         <View style={styles.content}>
           <TouchableOpacity
@@ -102,7 +102,7 @@ export const ProfileScreen = ({ navigation }) => {
           </TouchableOpacity>
           <View style={styles.imgBox}>
             <Image
-              source={require("../../assets/images/userImg.jpg")}
+              source={require("../../../assets/images/userImg.jpg")}
               style={styles.userImage}
             />
 
@@ -111,7 +111,7 @@ export const ProfileScreen = ({ navigation }) => {
               activeOpacity={0.8}
             >
               <Image
-                source={require("../../assets/images/removeBtn.png")}
+                source={require("../../../assets/images/removeBtn.png")}
                 style={styles.addUserBtnImg}
               />
             </TouchableOpacity>

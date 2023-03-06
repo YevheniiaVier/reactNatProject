@@ -7,8 +7,8 @@ const RobotoRegular = require("./assets/fonts/Roboto/Roboto-Regular.ttf");
 const RobotoBold = require("./assets/fonts/Roboto/Roboto-Bold.ttf");
 const RobotoMedium = require("./assets/fonts/Roboto/Roboto-Medium.ttf");
 
-import { store } from "./redux/store";
-import { Main } from "./Components/Main";
+import { store } from "./src/redux/store";
+import { Main } from "./src/Components/Main";
 
 export default function App({ navigation, route }) {
   const [fontsLoaded] = useFonts({

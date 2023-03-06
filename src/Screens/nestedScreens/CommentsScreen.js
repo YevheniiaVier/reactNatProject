@@ -89,7 +89,7 @@ export const CommentsScreen = ({ navigate, route }) => {
       <View style={styles.commentsBox}>
         <View style={styles.imgBox}>
           <Image
-            source={require("../../assets/images/avatar.jpg")}
+            source={require("../../../assets/images/avatar.jpg")}
             style={styles.avatar}
           />
         </View>

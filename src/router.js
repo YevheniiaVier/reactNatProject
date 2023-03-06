@@ -2,9 +2,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const AuthStack = createNativeStackNavigator();
 
-import { HomeScreen } from "./Screens/main/HomeScreen";
-import { RegistrationScreen } from "./Screens/Auth/RegistrationScreen";
-import { LoginScreen } from "./Screens/Auth/LoginScreen";
+import { HomeScreen } from "../src/Screens/main/HomeScreen";
+import { RegistrationScreen } from "../src/Screens/Auth/RegistrationScreen";
+import { LoginScreen } from "../src/Screens/Auth/LoginScreen";
 
 export const userRoute = (isAuth) => {
   return (

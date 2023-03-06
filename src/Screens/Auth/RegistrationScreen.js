@@ -10,17 +10,18 @@ import {
   TouchableOpacity,
   Keyboard,
   ImageBackground,
+  Image,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import { styles } from "./styles";
 
-import { useDispatch } from "react-redux";
+import { authSignUp } from "../../redux/auth/auth-operations";
 
-import { authSignIn } from "../../redux/auth/auth-operations";
+export const RegistrationScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
 
-export const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocused, setIsFocused] = useState({
@@ -28,9 +29,10 @@ export const LoginScreen = ({ navigation }) => {
     email: false,
     password: false,
   });
-  const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const nameHandler = (value) => setName(value);
   const passwordHandler = (value) => setPassword(value);
   const emailHandler = (value) => setEmail(value);
 
@@ -52,11 +54,13 @@ export const LoginScreen = ({ navigation }) => {
     Keyboard.dismiss();
     setIsShowKeyboard(false);
   };
-  const onLogin = () => {
+  const onRegister = () => {
     dismissKeyboard();
-    dispatch(authSignIn({ email, password }));
+    dispatch(authSignUp({ name, password, email }));
+
     // navigation.navigate("Home");
     setEmail("");
+    setName("");
     setPassword("");
   };
   const toggleSecureEntry = () => {
@@ -74,13 +78,28 @@ export const LoginScreen = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={dismissKeyboard}>
         <ImageBackground
           style={styles.bcg}
-          source={require("../../assets/images/bcgimg.jpg")}
+          source={require("../../../assets/images/bcgimg.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
           >
-            <View style={{ ...styles.form, paddingTop: 32 }}>
-              <Text style={styles.formTitle}>Увійти</Text>
+            <View style={styles.form}>
+              <Text style={styles.formTitle}>Реєстрація</Text>
+
+              <View>
+                <TextInput
+                  onFocus={() => {
+                    setIsShowKeyboard(true);
+                    handleInputFocus("login");
+                  }}
+                  onBlur={() => handleInputBlur("login")}
+                  placeholderTextColor="#BDBDBD9"
+                  placeholder="Логін"
+                  value={name}
+                  onChangeText={nameHandler}
+                  style={isFocused.login ? styles.inputFocused : styles.input}
+                />
+              </View>
 
               <View>
                 <TextInput
@@ -129,21 +148,47 @@ export const LoginScreen = ({ navigation }) => {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.btn}
-                    onPress={onLogin}
+                    onPress={onRegister}
                   >
-                    <Text style={styles.btnTitle}>Увійти</Text>
+                    <Text style={styles.btnTitle}>Зареєструватися</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     activeOpacity={0.7}
-                    // style={styles.btn}
-                    onPress={() => navigation.navigate("Registration")}
+                    onPress={() => navigation.navigate("Login")}
                   >
-                    <Text style={{ ...styles.formText, marginBottom: 144 }}>
-                      Немає аккаунта? Зареєструватися
-                    </Text>
+                    <Text style={styles.formText}>Вже є аккаунт? Увійти</Text>
                   </TouchableOpacity>
                 </>
               )}
+              <View style={styles.imgBox}>
+                {isShowKeyboard && (
+                  <Image
+                    source={require("../../../assets/images/userImg.jpg")}
+                    style={styles.userImage}
+                  />
+                )}
+                {isShowKeyboard ? (
+                  <TouchableOpacity
+                    style={{ ...styles.addUserImgBtn, borderColor: "#E8E8E8" }}
+                    activeOpacity={0.8}
+                  >
+                    <Image
+                      source={require("../../../assets/images/removeBtn.png")}
+                      style={styles.addUserBtnImg}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.addUserImgBtn}
+                    activeOpacity={0.7}
+                  >
+                    <Image
+                      source={require("../../../assets/images/addBtn.png")}
+                      style={styles.addUserBtnImg}
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>

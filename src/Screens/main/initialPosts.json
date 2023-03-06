@@ -1,19 +1,19 @@
 [
   {
     "id": "1",
-    "photo": "../../assets/images/posts/post-img1.jpg",
+    "photo": "../../../assets/images/posts/post-img1.jpg",
     "description": "Ліс",
     "location": "Ivano-Frankivs'k Region, Ukraine"
   },
   {
     "id": "2",
-    "photo": "../../assets/images/posts/post-img2.jpg",
+    "photo": "../../../assets/images/posts/post-img2.jpg",
     "description": "Захід сонця на Чорному морі",
     "location": "Odessa Region, Ukraine"
   },
   {
     "id": "3",
-    "photo": "../../assets/images/posts/post-img3.jpg",
+    "photo": "../../../assets/images/posts/post-img3.jpg",
     "description": "Старий будиночок у Венеції",
     "location": "Venice , Italy"
   }
